@@ -25,12 +25,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // y: 0 = top, 500 = bottom
     const positions = {
         name: {
-            x: 400,  // 400 = center horizontally
+            x: 420,  // 400 = center horizontally
             y: 230   // 180 pixels from TOP
         },
         id: {
-            x: 300,  // 300 = center horizontally
-            y: 290   // 240 pixels from TOP
+            x: 290,  // 300 = center horizontally
+            y: 290   // 220 pixels from TOP
         }
     };
     
