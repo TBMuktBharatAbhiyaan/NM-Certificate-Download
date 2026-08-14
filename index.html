@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikshay Mitra Certificate</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #4b6cb7;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            width: 100%;
+            max-width: 700px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #b71c1c;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            font-size: to6px;
+        }
+        input.valid { border-color: green; background: #f0fff0; }
+        input.invalid { border-color: red; background: #fff0f0; }
+        #validationMessage {
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        #previewBtn { background: #667eea; color: white; }
+        #downloadBtn { background: #28a745; color: white; }
+        #downloadBtn:disabled { background: #ccc; cursor: not-allowed; }
+        .preview {
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        canvas {
+            max-width: 100%;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nikshay Mitra Certificate</h1>
+        
+        <div class="input-group">
+            <label for="nameInput">Full Name</label>
+            <input type="text" id="nameInput" placeholder="Enter name" maxlength="50">
+        </div>
+        
+        <div class="input-group">
+            <label for="idInput">Nikshay Mitra ID</label>
+            <input type="text" id="idInput" placeholder="M12345678901" maxlength="12">
+        </div>
+        
+        <div id="validationMessage"></div>
+        
+        <div class="buttons">
+            <button id="previewBtn">Preview</button>
+            <button id="downloadBtn" disabled>Download PDF</button>
+        </div>
+        
+        <div class="preview">
+            <canvas id="certificateCanvas" width="800" height="500"></canvas>
+            <div id="previewPlaceholder">
+                Enter name and NM ID to preview certificate
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
