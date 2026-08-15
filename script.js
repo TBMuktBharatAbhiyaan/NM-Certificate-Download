@@ -25,11 +25,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // y: 0 = top, 500 = bottom
     const positions = {
         name: {
-            x: 525,  // 525 = center horizontally
+            x: 530,  // 530 = center horizontally
             y: 235   // 235 pixels from TOP
         },
         id: {
-            x: 275,  // 275 = center horizontally
+            x: 272,  // 272 = center horizontally
             y: 272   // 272 pixels from TOP
         }
     };
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         pdf: {
             name: 36,   // ×2 for high resolution
-            id: 28      // ×2 for high resolution
+            id: 25      // ×2 for high resolution
         }
     };
     
