@@ -244,14 +244,11 @@ if (name.length > 0 && !isNameValid) {
     }
     
     // Event listeners
-    elements.idInput.addEventListener('input', function() {
-        let value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
-        if (value.length > 0 && value[0] !== 'M') {
-            value = 'M' + value.substring(1);
-        }
-        this.value = value.substring(0, 20);
-        updateValidation();
-    });
+   elements.idInput.addEventListener('input', function() {
+    this.value = this.value.toUpperCase();
+    updateValidation();
+});
+
     
     elements.nameInput.addEventListener('input', updateValidation);
     
