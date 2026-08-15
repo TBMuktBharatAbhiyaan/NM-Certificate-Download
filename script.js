@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         pdf: {
             name: 36,   // ×2 for high resolution
-            id: 30      // ×2 for high resolution
+            id: 28      // ×2 for high resolution
         }
     };
     
