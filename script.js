@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (id.length > 0) {
             elements.validationMessage.textContent = isIdValid 
                 ? '✓ Valid NM ID' 
-                : '✗ Must be M + 11 digits';
+                : '✗ Invalid/Inactive NM ID!';
             elements.validationMessage.className = isIdValid ? 'success' : 'error';
             elements.validationMessage.style.display = 'block';
         } else {
