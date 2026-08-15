@@ -103,10 +103,16 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.fillText('ID goes here', positions.id.x, positions.id.y + 20);
     }
     
-    // Validate NM ID
-    function validateNikshayMitraId(id) {
-        return /^M\d{11}$/.test(id);
-    }
+    // function validateNikshayMitraId(id) {
+    // Rule 1: Must be M + exactly 11 digits
+    if (!/^M\d{11}$/.test(id)) return false;
+    
+    // Rule 2: No digit repeated more than 4 times consecutively
+    if (/(\d)\1{4,}/.test(id)) return false;
+    
+    return true;
+}
+
     
     // Update validation
     function updateValidation() {
