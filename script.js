@@ -115,6 +115,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     return true;
 }
+function validateName(name) {
+    return /^[A-Z].{3,}$/.test(name.trim());
+}
 
     
     // Update validation
@@ -123,10 +126,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const id = elements.idInput.value.trim().toUpperCase();
         
         // Name validation
-        isNameValid = name.length > 0 && name.length <= 50;
+        isNameValid = validateName(name);
         elements.nameInput.classList.toggle('valid', isNameValid && name.length > 0);
         elements.nameInput.classList.toggle('invalid', !isNameValid && name.length > 0);
-        
+        // Name validation message
+if (name.length > 0 && !isNameValid) {
+    elements.nameInput.placeholder = 'Not found';
+} else {
+    elements.nameInput.placeholder = 'Enter name';
+}
+
         // ID validation
         isIdValid = validateNikshayMitraId(id);
         elements.idInput.classList.toggle('valid', isIdValid && id.length > 0);
