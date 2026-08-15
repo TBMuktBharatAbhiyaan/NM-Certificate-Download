@@ -103,13 +103,16 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.fillText('ID goes here', positions.id.x, positions.id.y + 20);
     }
     
-    function validateNikshayMitraId(id) {
-    // Rule 1: Must be M + exactly 11 digits
+   function validateNikshayMitraId(id) {
+    // Must be M + exactly 11 digits
     if (!/^M\d{11}$/.test(id)) return false;
-    
-    // Rule 2: No digit repeated more than 4 times consecutively
+
+    // No same digit repeated 5 or more times in a row
     if (/(\d)\1{4,}/.test(id)) return false;
-    
+
+    // No ascending sequence of 5 or more consecutive digits
+    if (/01234|12345|23456|34567|45678|56789/.test(id)) return false;
+
     return true;
 }
 
