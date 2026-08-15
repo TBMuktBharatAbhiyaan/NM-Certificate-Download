@@ -106,7 +106,8 @@ document.addEventListener('DOMContentLoaded', function() {
    function validateNikshayMitraId(id) {
     // Must be M + exactly 11 digits
     if (!/^M\d{11}$/.test(id)) return false;
-
+// Second character (after M) must be 2
+    if (id[1] !== '2') return false;
     // No same digit repeated 5 or more times in a row
     if (/(\d)\1{4,}/.test(id)) return false;
 
