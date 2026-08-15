@@ -37,11 +37,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // >>>>>> ADJUST THESE VALUES FOR FONT SIZE <<<<<<
     const fontSizes = {
         preview: {
-            name: 32,
+            name: 28,
             id: 24
         },
         pdf: {
-            name: 64,   // ×2 for high resolution
+            name: 56,   // ×2 for high resolution
             id: 48      // ×2 for high resolution
         }
     };
