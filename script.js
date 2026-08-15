@@ -184,7 +184,8 @@ if (id.length > 0 && !isIdValid) {
         ctx.fillStyle = '#000000';
         ctx.font = `bold ${fontSizes.preview.name}px Arial`;
         ctx.textAlign = 'center';
-        ctx.fillText(name, positions.name.x, positions.name.y);
+        ctx.fillText(name.toUpperCase(), positions.name.x, positions.name.y);
+
         
         // Draw ID
         ctx.fillStyle = '#000000';
@@ -221,7 +222,8 @@ if (id.length > 0 && !isIdValid) {
             pdfCtx.fillStyle = '#000000';
             pdfCtx.font = `bold ${fontSizes.pdf.name}px Arial`;
             pdfCtx.textAlign = 'center';
-            pdfCtx.fillText(name, positions.name.x * 2, positions.name.y * 2);
+            pdfCtx.fillText(name.toUpperCase(), positions.name.x * 2, positions.name.y * 2);
+
             
             // Draw ID on PDF
             pdfCtx.fillStyle = '#000000';
