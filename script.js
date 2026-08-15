@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.fillText('ID goes here', positions.id.x, positions.id.y + 20);
     }
     
-    // function validateNikshayMitraId(id) {
+    function validateNikshayMitraId(id) {
     // Rule 1: Must be M + exactly 11 digits
     if (!/^M\d{11}$/.test(id)) return false;
     
