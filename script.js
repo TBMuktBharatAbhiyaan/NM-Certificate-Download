@@ -144,15 +144,15 @@ if (name.length > 0 && !isNameValid) {
         elements.idInput.classList.toggle('invalid', !isIdValid && id.length > 0);
         
         // Validation message
-        if (id.length > 0) {
-            elements.validationMessage.textContent = isIdValid 
-                ? '✓ Valid NM ID' 
-                : '✗ Invalid/Inactive NM ID!';
-            elements.validationMessage.className = isIdValid ? 'success' : 'error';
-            elements.validationMessage.style.display = 'block';
-        } else {
-            elements.validationMessage.style.display = 'none';
-        }
+        // Validation message
+if (id.length > 0 && !isIDValid) {
+    elements.validationMessage.textContent = 'X Invalid/Inactive NM ID';
+    elements.validationMessage.className = 'error';
+    elements.validationMessage.style.display = 'block';
+} else {
+    elements.validationMessage.style.display = 'none';
+}
+
         
         // Update buttons
         const allValid = isNameValid && isIdValid && isImageLoaded;
