@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (value.length > 0 && value[0] !== 'M') {
             value = 'M' + value.substring(1);
         }
-        this.value = value.substring(0, 12);
+        this.value = value.substring(0, 20);
         updateValidation();
     });
     
