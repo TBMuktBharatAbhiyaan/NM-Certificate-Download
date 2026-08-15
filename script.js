@@ -145,7 +145,7 @@ if (name.length > 0 && !isNameValid) {
         
         // Validation message
         // Validation message
-if (id.length > 0 && !isIDValid) {
+if (id.length > 0 && !isIdValid) {
     elements.validationMessage.textContent = 'X Invalid/Inactive NM ID';
     elements.validationMessage.className = 'error';
     elements.validationMessage.style.display = 'block';
