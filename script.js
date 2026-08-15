@@ -112,7 +112,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // No ascending sequence of 5 or more consecutive digits
     if (/01234|12345|23456|34567|45678|56789/.test(id)) return false;
-
+ // No descending sequence of 5 or more consecutive digits
+    if (/98765|87654|76543|65432|54321|43210/.test(id)) return false;
     return true;
 }
 function validateName(name) {
