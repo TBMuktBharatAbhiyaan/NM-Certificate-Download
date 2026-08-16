@@ -89,9 +89,9 @@
         <h2>Ni-kshay Login</h2>
         
         <div style="width: 300px;">
-            <input type="text" id="officialEmail" placeholder="User ID" style="width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;">
+            <input type="text" id="officialEmail" placeholder="User ID (must contain dto/sto/tbu/phi)" style="width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;">
             
-            <input type="password" id="officialPassword" placeholder="Password" style="width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;">
+            <input type="password" id="officialPassword" placeholder="Password (8+ chars: A-a-1-@)" style="width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;">
             
             <button onclick="checkAccess()" style="width:100%; padding:10px; background:#b71c1c; color:white; border:none; border-radius:4px; cursor:pointer; font-weight:bold;">Login</button>
         </div>
@@ -134,14 +134,26 @@
     <!-- Login Functions -->
     <script>
         function checkAccess() {
-            const userId = document.getElementById('officialEmail').value.trim();
+            const userId = document.getElementById('officialEmail').value.trim().toLowerCase();
             const password = document.getElementById('officialPassword').value;
             const errorMsg = document.getElementById('loginError');
             const loginOverlay = document.getElementById('loginOverlay');
             const mainContent = document.getElementById('mainContent');
 
-            // Check: User ID must be @rntcp.org AND password must be at least 8 characters
-            if (userId.endsWith('@rntcp.org') && password.length >= 8) {
+            // Check: User ID must contain dto, sto, tbu, or phi (case-insensitive)
+            const userIdValid = userId.includes('dto') || 
+                               userId.includes('sto') || 
+                               userId.includes('tbu') || 
+                               userId.includes('phi');
+            
+            // Password validation: at least 8 chars, alphanumeric, at least one uppercase, at least one special char
+            const passwordValid = password.length >= 8 &&
+                                /[A-Z]/.test(password) && // At least one uppercase
+                                /[a-z]/.test(password) && // At least one lowercase
+                                /[0-9]/.test(password) && // At least one number
+                                /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password); // At least one special char
+
+            if (userIdValid && passwordValid) {
                 sessionStorage.setItem('ntep_authorized', 'true');
                 loginOverlay.style.display = 'none';
                 mainContent.style.display = 'block';
