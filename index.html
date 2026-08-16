@@ -85,63 +85,70 @@
 </head>
 <body>
     <!-- Login Section -->
-<div id="loginOverlay" style="position:fixed; top:0; left:0; width:100%; height:100%; background:white; z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; font-family: Arial;">
-    <h2>NTEP Portal Login</h2>
-    <p>Access restricted to official @rntcp.org users</p>
-    <div style="width: 300px;">
-        <input type="email" id="officialEmail" placeholder="Official Email (@rntcp.org)" style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:4px;">
-        <button onclick="checkAccess()" style="width:100%; padding:10px; background:#b71c1c; color:white; border:none; border-radius:4px; cursor:pointer; font-weight:bold;">Enter Portal</button>
+    <div id="loginOverlay" style="position:fixed; top:0; left:0; width:100%; height:100%; background:white; z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; font-family: Arial;">
+        <h2>Ni-kshay Login</h2>
+        
+        <div style="width: 300px;">
+            <input type="text" id="officialEmail" placeholder="User ID" style="width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;">
+            
+            <input type="password" id="officialPassword" placeholder="Password" style="width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;">
+            
+            <button onclick="checkAccess()" style="width:100%; padding:10px; background:#b71c1c; color:white; border:none; border-radius:4px; cursor:pointer; font-weight:bold;">User ID</button>
+        </div>
+        
+        <p id="loginError" style="color:red; display:none; margin-top:10px;">❌ Access Denied</p>
     </div>
-    <p id="loginError" style="color:red; display:none; margin-top:10px;">❌ Invalid official email domain.</p>
-</div>
 
-   <div id="mainContent" style="display:none;">
-    <div class="container">
-        <h1>Nikshay Mitra Certificate</h1>
-
-        
-        <div class="input-group">
-            <label for="nameInput">Full Name</label>
-            <input type="text" id="nameInput" placeholder="Enter name" maxlength="50">
-        </div>
-        
-        <div class="input-group">
-            <label for="idInput">Nikshay Mitra ID</label>
-            <input type="text" id="idInput" placeholder="Enter Valid & Active NM ID" maxlength="20">
-        </div>
-        
-        <div id="validationMessage"></div>
-        
-        <div class="buttons">
-            <button id="previewBtn">Preview</button>
-            <button id="downloadBtn" disabled>Download PDF</button>
-        </div>
-        
-        <div class="preview">
-            <canvas id="certificateCanvas" width="800" height="500"></canvas>
-            <div id="previewPlaceholder">
-                Enter name and NM ID to preview certificate
+    <div id="mainContent" style="display:none;">
+        <div class="container">
+            <h1>Nikshay Mitra Certificate</h1>
+            
+            <div class="input-group">
+                <label for="nameInput">Full Name</label>
+                <input type="text" id="nameInput" placeholder="Enter name" maxlength="50">
+            </div>
+            
+            <div class="input-group">
+                <label for="idInput">Nikshay Mitra ID</label>
+                <input type="text" id="idInput" placeholder="Enter Valid & Active NM ID" maxlength="20">
+            </div>
+            
+            <div id="validationMessage"></div>
+            
+            <div class="buttons">
+                <button id="previewBtn">Preview</button>
+                <button id="downloadBtn" disabled>Download PDF</button>
+            </div>
+            
+            <div class="preview">
+                <canvas id="certificateCanvas" width="800" height="500"></canvas>
+                <div id="previewPlaceholder">
+                    Enter name and NM ID to preview certificate
+                </div>
             </div>
         </div>
     </div>
-       </div>
     
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- Login Functions -->
     <script>
         function checkAccess() {
-            const email = document.getElementById('officialEmail').value.toLowerCase().trim();
+            const userId = document.getElementById('officialEmail').value.trim();
+            const password = document.getElementById('officialPassword').value;
             const errorMsg = document.getElementById('loginError');
             const loginOverlay = document.getElementById('loginOverlay');
             const mainContent = document.getElementById('mainContent');
 
-            if (email.endsWith('@rntcp.org')) {
+            // Check: User ID must be @rntcp.org AND password must be at least 8 characters
+            if (userId.endsWith('@rntcp.org') && password.length >= 8) {
                 sessionStorage.setItem('ntep_authorized', 'true');
                 loginOverlay.style.display = 'none';
                 mainContent.style.display = 'block';
+                errorMsg.style.display = 'none';
             } else {
                 errorMsg.style.display = 'block';
-                errorMsg.textContent = "❌ Access Denied: Please use a valid @rntcp.org email.";
+                errorMsg.textContent = "❌ Access Denied";
             }
         }
 
@@ -152,8 +159,7 @@
             }
         };
     </script>
-
+    
     <script src="script.js"></script>
-
 </body>
 </html>
