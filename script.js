@@ -115,6 +115,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (/01234|12345|23456|34567|45678|56789/.test(id)) return false;
  // No descending sequence of 5 or more consecutive digits
     if (/98765|87654|76543|65432|54321|43210/.test(id)) return false;
+       // Among the 11 digits after M, there must be at least 3 different digits
+const digitsPart = id.substring(1); // remove M
+const uniqueDigits = new Set(digitsPart);
+if (uniqueDigits.size < 3) return false;
     return true;
 }
 function validateName(name) {
