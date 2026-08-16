@@ -224,7 +224,7 @@ if (id.length > 0 && !isIdValid) {
             
             // Draw name on PDF (positions doubled)
             pdfCtx.fillStyle = '#000000';
-            pdfCtx.font = `italic ${fontSizes.pdf.name}px , sans-serif`;
+            pdfCtx.font = `italic ${fontSizes.pdf.name}px  Arial`;
             pdfCtx.textAlign = 'center';
             pdfCtx.fillText(name.toUpperCase(), positions.name.x * 2, positions.name.y * 2);
 
