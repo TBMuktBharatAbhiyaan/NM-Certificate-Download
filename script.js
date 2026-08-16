@@ -186,7 +186,7 @@ if (id.length > 0 && !isIdValid) {
         
         // Draw name
         ctx.fillStyle = '#000000';
-        ctx.font = `bold ${fontSizes.preview.name}px Arial`;
+        ctx.font = `${fontSizes.preview.name}px Arial`;
         ctx.textAlign = 'center';
         ctx.fillText(name.toUpperCase(), positions.name.x, positions.name.y);
 
