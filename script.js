@@ -122,7 +122,7 @@ if (uniqueDigits.size < 3) return false;
     return true;
 }
 function validateName(name) {
-    return /^[A-Z].{3,}$/.test(name.trim());
+    return /^[A-Z].{6,}$/.test(name.trim());
 }
 
     
