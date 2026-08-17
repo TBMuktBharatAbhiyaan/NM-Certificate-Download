@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
             y: 208   // 236 pixels from TOP
         },
         id: {
-            x: 200,  // 272 = center horizontally
+            x: 180,  // 272 = center horizontally
             y: 238   // 272 pixels from TOP
         }
     };
