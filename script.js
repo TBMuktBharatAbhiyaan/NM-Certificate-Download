@@ -29,8 +29,8 @@ document.addEventListener('DOMContentLoaded', function() {
             y: 207   // 207 pixels from TOP
         },
         id: {
-            x: 161,  // 160 = center horizontally
-            y: 235   // 236 pixels from TOP
+            x: 161,  // 161 = center horizontally
+            y: 235   // 235 pixels from TOP
         }
     };
     
