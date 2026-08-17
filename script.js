@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const positions = {
         name: {
             x: 530,  // 530 = center horizontally
-            y: 235   // 235 pixels from TOP
+            y: 232   // 232 pixels from TOP
         },
         id: {
             x: 272,  // 272 = center horizontally
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         pdf: {
             name: 32,   // ×2 for high resolution
-            id: 25      // ×2 for high resolution
+            id: 26      // ×2 for high resolution
         }
     };
     
@@ -108,17 +108,17 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!/^M\d{11}$/.test(id)) return false;
 // Second character (after M) must be 2
     if (id[1] !== '2') return false;
-    // No same digit repeated 5 or more times in a row
-    if (/(\d)\1{4,}/.test(id)) return false;
+    // No same digit repeated 4 or more times in a row
+    if (/(\d)\1{3,}/.test(id)) return false;
 
     // No ascending sequence of 5 or more consecutive digits
     if (/01234|12345|23456|34567|45678|56789/.test(id)) return false;
  // No descending sequence of 5 or more consecutive digits
     if (/98765|87654|76543|65432|54321|43210/.test(id)) return false;
-       // Among the 11 digits after M, there must be at least 3 different digits
+       // Among the 11 digits after M, there must be at least 4 different digits
 const digitsPart = id.substring(1); // remove M
 const uniqueDigits = new Set(digitsPart);
-if (uniqueDigits.size < 3) return false;
+if (uniqueDigits.size < 4) return false;
     return true;
 }
 function validateName(name) {
