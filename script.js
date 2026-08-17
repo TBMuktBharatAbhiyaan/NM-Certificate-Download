@@ -211,8 +211,8 @@ if (id.length > 0 && !isIdValid) {
             // High-res canvas for PDF
             const pdfCanvas = document.createElement('canvas');
             const pdfCtx = pdfCanvas.getContext('2d');
-            pdfCanvas.width = 1600;  // Double resolution
-            pdfCanvas.height = 1000; // Double resolution
+            pdfCanvas.width = 1584;  // Double resolution
+            pdfCanvas.height = 990; // Double resolution
             
             // Draw background
             if (certificateImage) {
