@@ -42,6 +42,7 @@
             border: 2px solid #ccc;
             border-radius: 5px;
             font-size: 16px;
+            box-sizing: border-box;
         }
         input.valid { border-color: green; background: #f0fff0; }
         input.invalid { border-color: red; background: #fff0f0; }
@@ -84,42 +85,41 @@
     </style>
 </head>
 <body>
-    <!-- Login Section -->
     <div id="loginOverlay" style="position:fixed; top:0; left:0; width:100%; height:100%; background:white; z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; font-family: Arial;">
         <h2>Ni-kshay Login</h2>
-        
+
         <div style="width: 300px;">
             <input type="text" id="officialEmail" placeholder="User ID" style="width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;">
-            
+
             <input type="password" id="officialPassword" placeholder="Password" style="width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;">
-            
+
             <button onclick="checkAccess()" style="width:100%; padding:10px; background:#b71c1c; color:white; border:none; border-radius:4px; cursor:pointer; font-weight:bold;">Login</button>
         </div>
-        
+
         <p id="loginError" style="color:red; display:none; margin-top:10px;">❌ Access Denied</p>
     </div>
 
     <div id="mainContent" style="display:none;">
         <div class="container">
             <h1>Nikshay Mitra Certificate</h1>
-            
+
             <div class="input-group">
                 <label for="nameInput">Full Name</label>
                 <input type="text" id="nameInput" placeholder="Enter name" maxlength="50">
             </div>
-            
+
             <div class="input-group">
                 <label for="idInput">Nikshay Mitra ID</label>
                 <input type="text" id="idInput" placeholder="Enter Valid & Active NM ID" maxlength="20">
             </div>
-            
+
             <div id="validationMessage"></div>
-            
+
             <div class="buttons">
                 <button id="previewBtn">Preview</button>
                 <button id="downloadBtn" disabled>Download PDF</button>
             </div>
-            
+
             <div class="preview">
                 <canvas id="certificateCanvas" width="800" height="500"></canvas>
                 <div id="previewPlaceholder">
@@ -128,10 +128,9 @@
             </div>
         </div>
     </div>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    
-    <!-- Login Functions -->
+
     <script>
         function checkAccess() {
             const userId = document.getElementById('officialEmail').value.trim().toLowerCase();
@@ -139,20 +138,20 @@
             const errorMsg = document.getElementById('loginError');
             const loginOverlay = document.getElementById('loginOverlay');
             const mainContent = document.getElementById('mainContent');
-// User ID validation: 9 chars
-            const userIdValid = userId.length = 9 
-            // Check: User ID must contain dto-, sto-, tbu-, or phi- (case-insensitive)
-            const userIdValid = userId.includes('dto-') || 
-                               userId.includes('sto-') || 
-                               userId.includes('tbu-') || 
-                               userId.includes('phi-');
-            
-            // Password validation: at least 8 chars, alphanumeric, at least one uppercase, at least one special char
-            const passwordValid = password.length >= 8 &&
-                                /[A-Z]/.test(password) && // At least one uppercase
-                                /[a-z]/.test(password) && // At least one lowercase
-                                /[0-9]/.test(password) && // At least one number
-                                /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password); // At least one special char
+
+            // User ID must be exactly 9 characters:
+            // starts with dto-, sto-, tbu-, or phi-
+            // followed by exactly 5 letters
+            const userIdValid = /^(dto|sto|tbu|phi)-[a-z]{5}$/i.test(userId);
+
+            // Password validation:
+            // at least 8 chars, one uppercase, one lowercase, one number, one special char
+            const passwordValid =
+                password.length >= 8 &&
+                /[A-Z]/.test(password) &&
+                /[a-z]/.test(password) &&
+                /[0-9]/.test(password) &&
+                /[^A-Za-z0-9]/.test(password);
 
             if (userIdValid && passwordValid) {
                 sessionStorage.setItem('ntep_authorized', 'true');
@@ -172,7 +171,7 @@
             }
         };
     </script>
-    
+
     <script src="script.js"></script>
 </body>
 </html>
