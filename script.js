@@ -38,11 +38,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const fontSizes = {
         preview: {
             name: 20,
-            id: 10
+            id: 11
         },
         pdf: {
             name: 32,   // ×2 for high resolution
-            id: 20      // ×2 for high resolution
+            id: 21      // ×2 for high resolution
         }
     };
     
