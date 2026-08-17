@@ -26,23 +26,23 @@ document.addEventListener('DOMContentLoaded', function() {
     const positions = {
         name: {
             x: 530,  // 530 = center horizontally
-            y: 236   // 236 pixels from TOP
+            y: 226   // 236 pixels from TOP
         },
         id: {
-            x: 272,  // 272 = center horizontally
-            y: 272   // 272 pixels from TOP
+            x: 252,  // 272 = center horizontally
+            y: 262   // 272 pixels from TOP
         }
     };
     
     // >>>>>> ADJUST THESE VALUES FOR FONT SIZE <<<<<<
     const fontSizes = {
         preview: {
-            name: 24,
-            id: 20
+            name: 20,
+            id: 12
         },
         pdf: {
-            name: 32,   // ×2 for high resolution
-            id: 26      // ×2 for high resolution
+            name: 24,   // ×2 for high resolution
+            id: 16      // ×2 for high resolution
         }
     };
     
