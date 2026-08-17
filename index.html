@@ -141,10 +141,10 @@
             const mainContent = document.getElementById('mainContent');
 
             // Check: User ID must contain dto, sto, tbu, or phi (case-insensitive)
-            const userIdValid = userId.includes('dto') || 
-                               userId.includes('sto') || 
-                               userId.includes('tbu') || 
-                               userId.includes('phi');
+            const userIdValid = userId.includes('dto-') || 
+                               userId.includes('sto-') || 
+                               userId.includes('tbu-') || 
+                               userId.includes('phi-');
             
             // Password validation: at least 8 chars, alphanumeric, at least one uppercase, at least one special char
             const passwordValid = password.length >= 8 &&
