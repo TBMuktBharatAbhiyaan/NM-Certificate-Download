@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
             y: 207   // 207 pixels from TOP
         },
         id: {
-            x: 160,  // 160 = center horizontally
+            x: 161,  // 160 = center horizontally
             y: 235   // 236 pixels from TOP
         }
     };
@@ -231,7 +231,7 @@ if (id.length > 0 && !isIdValid) {
             
             // Draw ID on PDF
             pdfCtx.fillStyle = '#000000';
-            pdfCtx.font = `${fontSizes.pdf.id}px Arial`;
+            pdfCtx.font = `italic ${fontSizes.pdf.id}px Arial`;
             pdfCtx.fillText(id, positions.id.x * 2, positions.id.y * 2);
             
             // Add image to PDF
