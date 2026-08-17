@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let certificateImage = null;
     let isImageLoaded = false;
     
-    // >>>>>> ADJUST THESE VALUES FOR TEXT POSITION <<<<<
+    // >>>>>> ADJUST THESE VALUES FOR TEXT POSITION <<<<<<
     // Canvas size: 800px × 500px
     // x: 0 = left, 800 = right
     // y: 0 = top, 500 = bottom
