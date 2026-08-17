@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikshay Mitra Certificate</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #87ceeb 0%, #e0f7fa 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        #loginOverlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(160deg, #87ceeb 0%, #b8e4f9 50%, #e0f7fa 100%);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .login-container {
+            text-align: center;
+            position: relative;
+            z-index: 10000;
+            margin-bottom: 260px;
+        }
+
+        .header-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .portal-name {
+            font-size: 38px;
+            font-weight: 700;
+            color: #ff8c00;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 6px rgba(255,140,0,0.25);
+        }
+
+        .portal-subtitle {
+            font-size: 18px;
+            color: #444;
+            font-weight: 500;
+        }
+
+        .login-box {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: #f9f9f9;
+            color: #444;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #4169e1;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(65,105,225,0.1);
+        }
+
+        .form-group input::placeholder { color: #888; }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #4169e1 0%, #1e90ff 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(135deg, #1e90ff, #0066cc);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(65,105,225,0.3);
+        }
+
+        .error-message {
+            color: #d32f2f;
+            font-size: 14px;
+            margin-top: 15px;
+            display: none;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* Wavy Flag at bottom */
+        .flag-wave-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 260px;
+            z-index: 9998;
+            overflow: hidden;
+        }
+
+        .flag-wave-container svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* Certificate Page */
+        .container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            width: 100%;
+            max-width: 700px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            color: #4169e1;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 28px;
+        }
+
+        .input-group { margin-bottom: 20px; }
+
+        .input-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .input-group input.valid { border-color: green; background: #f0fff0; }
+        .input-group input.invalid { border-color: red; background: #fff0f0; }
+
+        #validationMessage {
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+
+        .buttons { display: flex; gap: 10px; margin: 20px 0; }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #previewBtn { background: #667eea; color: white; }
+        #downloadBtn { background: #28a745; color: white; }
+        #downloadBtn:disabled { background: #ccc; cursor: not-allowed; }
+
+        .preview {
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        canvas { max-width: 100%; border: 1px solid #ccc; }
+
+        #mainContent {
+            background: linear-gradient(135deg, #87ceeb 0%, #e0f7fa 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Login Section -->
+    <div id="loginOverlay">
+        <div class="login-container">
+            <div class="header-text">
+                <div class="portal-name">Ni-kshay</div>
+                <div class="portal-subtitle">Continue to Ni-kshay</div>
+            </div>
+
+            <div class="login-box">
+                <div class="form-group">
+                    <label>User Name</label>
+                    <input type="text" id="officialEmail" placeholder="Enter your User Name">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="officialPassword" placeholder="Enter your Password">
+                </div>
+                <button class="login-btn" onclick="checkAccess()">Login</button>
+                <div class="error-message" id="loginError">❌ Invalid credentials. Please try again.</div>
+            </div>
+        </div>
+
+        <!-- Wavy Indian Flag with SVG + Ashoka Chakra -->
+        <div class="flag-wave-container">
+            <svg viewBox="0 0 1440 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <!-- Saffron shine gradient -->
+                    <linearGradient id="saffronGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#ffcc44"/>
+                        <stop offset="40%" stop-color="#ff9933"/>
+                        <stop offset="100%" stop-color="#e65c00"/>
+                    </linearGradient>
+                    <!-- White shine gradient -->
+                    <linearGradient id="whiteGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#ffffff"/>
+                        <stop offset="50%" stop-color="#f0f0f0"/>
+                        <stop offset="100%" stop-color="#e8e8e8"/>
+                    </linearGradient>
+                    <!-- Green shine gradient -->
+                    <linearGradient id="greenGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#33cc33"/>
+                        <stop offset="40%" stop-color="#138808"/>
+                        <stop offset="100%" stop-color="#0a5c05"/>
+                    </linearGradient>
+                </defs>
+
+                <!-- SAFFRON wavy stripe -->
+                <path d="
+                    M0,30
+                    C200,10 400,60 600,30
+                    C800,0  1000,50 1200,25
+                    C1300,12 1380,35 1440,20
+                    L1440,110
+                    C1200,130 1000,85  800,115
+                    C600,145 400,95  200,125
+                    C100,138 50,115 0,125
+                    Z"
+                    fill="url(#saffronGrad)"
+                    opacity="1"
+                />
+
+                <!-- WHITE wavy stripe -->
+                <path d="
+                    M0,115
+                    C200,102 400,135 600,115
+                    C800,95  1000,130 1200,110
+                    C1300,100 1380,120 1440,108
+                    L1440,185
+                    C1200,200 1000,168 800,188
+                    C600,208 400,175 200,198
+                    C100,208 50,188 0,198
+                    Z"
+                    fill="url(#whiteGrad)"
+                    opacity="1"
+                />
+
+                <!-- GREEN wavy stripe -->
+                <path d="
+                    M0,198
+                    C200,183 400,212 600,195
+                    C800,178 1000,210 1200,192
+                    C1300,183 1380,200 1440,190
+                    L1440,260
+                    L0,260
+                    Z"
+                    fill="url(#greenGrad)"
+                    opacity="1"
+                />
+
+                <!-- Ashoka Chakra (24 spokes) centered on white stripe -->
+                <!-- Center of white stripe is around y=152, x=720 -->
+                <g transform="translate(720, 152)">
+                    <!-- Outer ring -->
+                    <circle cx="0" cy="0" r="38" fill="none" stroke="#000080" stroke-width="4"/>
+                    <!-- Inner ring -->
+                    <circle cx="0" cy="0" r="6" fill="#000080"/>
+                    <!-- 24 spokes -->
+                    <line x1="0" y1="-6"  x2="0"   y2="-34" stroke="#000080" stroke-width="2"/>
+                    <line x1="0" y1="6"   x2="0"   y2="34"  stroke="#000080" stroke-width="2"/>
+                    <line x1="-6" y1="0"  x2="-34" y2="0"   stroke="#000080" stroke-width="2"/>
+                    <line x1="6"  y1="0"  x2="34"  y2="0"   stroke="#000080" stroke-width="2"/>
+
+                    <line x1="4.2"  y1="-4.2"  x2="24.0" y2="-24.0" stroke="#000080" stroke-width="2"/>
+                    <line x1="-4.2" y1="4.2"   x2="-24.0" y2="24.0" stroke="#000080" stroke-width="2"/>
+                    <line x1="-4.2" y1="-4.2"  x2="-24.0" y2="-24.0" stroke="#000080" stroke-width="2"/>
+                    <line x1="4.2"  y1="4.2"   x2="24.0"  y2="24.0"  stroke="#000080" stroke-width="2"/>
+
+                    <line x1="5.8"  y1="-1.5"  x2="33.0" y2="-8.7"  stroke="#000080" stroke-width="2"/>
+                    <line x1="-5.8" y1="1.5"   x2="-33.0" y2="8.7"  stroke="#000080" stroke-width="2"/>
+                    <line x1="1.5"  y1="-5.8"  x2="8.7"  y2="-33.0" stroke="#000080" stroke-width="2"/>
+                    <line x1="-1.5" y1="5.8"   x2="-8.7" y2="33.0"  stroke="#000080" stroke-width="2"/>
+
+                    <line x1="-5.8" y1="-1.5"  x2="-33.0" y2="-8.7" stroke="#000080" stroke-width="2"/>
+                    <line x1="5.8"  y1="1.5"   x2="33.0"  y2="8.7"  stroke="#000080" stroke-width="2"/>
+                    <line x1="-1.5" y1="-5.8"  x2="-8.7" y2="-33.0" stroke="#000080" stroke-width="2"/>
+                    <line x1="1.5"  y1="5.8"   x2="8.7"  y2="33.0"  stroke="#000080" stroke-width="2"/>
+
+                    <line x1="2.6"  y1="-5.4"  x2="14.7" y2="-30.9" stroke="#000080" stroke-width="2"/>
+                    <line x1="-2.6" y1="5.4"   x2="-14.7" y2="30.9" stroke="#000080" stroke-width="2"/>
+                    <line x1="-5.4" y1="-2.6"  x2="-30.9" y2="-14.7" stroke="#000080" stroke-width="2"/>
+                    <line x1="5.4"  y1="2.6"   x2="30.9"  y2="14.7"  stroke="#000080" stroke-width="2"/>
+
+                    <line x1="-2.6" y1="-5.4"  x2="-14.7" y2="-30.9" stroke="#000080" stroke-width="2"/>
+                    <line x1="2.6"  y1="5.4"   x2="14.7"  y2="30.9"  stroke="#000080" stroke-width="2"/>
+                    <line x1="5.4"  y1="-2.6"  x2="30.9"  y2="-14.7" stroke="#000080" stroke-width="2"/>
+                    <line x1="-5.4" y1="2.6"   x2="-30.9" y2="14.7"  stroke="#000080" stroke-width="2"/>
+                </g>
+
+            </svg>
+        </div>
+    </div>
+
+    <!-- Certificate Page -->
+    <div id="mainContent">
+        <div class="container">
+            <h1>Nikshay Mitra Certificate</h1>
+            <div class="input-group">
+                <label for="nameInput">Full Name</label>
+                <input type="text" id="nameInput" placeholder="Enter name" maxlength="50">
+            </div>
+            <div class="input-group">
+                <label for="idInput">Nikshay Mitra ID</label>
+                <input type="text" id="idInput" placeholder="Enter Valid & Active NM ID" maxlength="20">
+            </div>
+            <div id="validationMessage"></div>
+            <div class="buttons">
+                <button id="previewBtn">Preview</button>
+                <button id="downloadBtn" disabled>Download PDF</button>
+            </div>
+            <div class="preview">
+                <canvas id="certificateCanvas" width="800" height="500"></canvas>
+                <div id="previewPlaceholder">Enter name and NM ID to preview certificate</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script>
+        function checkAccess() {
+            const userId = document.getElementById('officialEmail').value.trim().toLowerCase();
+            const password = document.getElementById('officialPassword').value;
+            const errorMsg = document.getElementById('loginError');
+
+            const userIdValid = /^(dto|sto|tbu|phi)-[a-z]{2,6}$/i.test(userId);
+
+            const passwordValid =
+                password.length >= 8 &&
+                /[A-Z]/.test(password) &&
+                /[a-z]/.test(password) &&
+                /[0-9]/.test(password) &&
+                /[^A-Za-z0-9]/.test(password);
+
+            if (userIdValid && passwordValid) {
+                sessionStorage.setItem('ntep_authorized', 'true');
+                document.getElementById('loginOverlay').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+                errorMsg.style.display = 'none';
+            } else {
+                errorMsg.style.display = 'block';
+            }
+        }
+
+        window.onload = function () {
+            if (sessionStorage.getItem('ntep_authorized') === 'true') {
+                document.getElementById('loginOverlay').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+            }
+        };
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>
