@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const positions = {
         name: {
             x: 530,  // 530 = center horizontally
-            y: 232   // 232 pixels from TOP
+            y: 236   // 236 pixels from TOP
         },
         id: {
             x: 272,  // 272 = center horizontally
