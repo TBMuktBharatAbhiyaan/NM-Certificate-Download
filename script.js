@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
     
-    // >>>>>> ADJUST THESE VALUES FOR FONT SIZE <<<<<
+    // >>>>>> ADJUST THESE VALUES FOR FONT SIZE <<<<<<
     const fontSizes = {
         preview: {
             name: 20,
