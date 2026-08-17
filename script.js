@@ -26,11 +26,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const positions = {
         name: {
             x: 530,  // 530 = center horizontally
-            y: 208   // 236 pixels from TOP
+            y: 207   // 236 pixels from TOP
         },
         id: {
-            x: 180,  // 272 = center horizontally
-            y: 238   // 272 pixels from TOP
+            x: 160,  // 272 = center horizontally
+            y: 236   // 272 pixels from TOP
         }
     };
     
@@ -38,11 +38,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const fontSizes = {
         preview: {
             name: 20,
-            id: 10
+            id: 12
         },
         pdf: {
-            name: 30,   // ×2 for high resolution
-            id: 18      // ×2 for high resolution
+            name: 32,   // ×2 for high resolution
+            id: 20      // ×2 for high resolution
         }
     };
     
