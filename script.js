@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         id: {
             x: 160,  // 160 = center horizontally
-            y: 236   // 236 pixels from TOP
+            y: 235   // 236 pixels from TOP
         }
     };
     
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const fontSizes = {
         preview: {
             name: 20,
-            id: 12
+            id: 10
         },
         pdf: {
             name: 32,   // ×2 for high resolution
