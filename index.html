@@ -139,7 +139,8 @@
             const errorMsg = document.getElementById('loginError');
             const loginOverlay = document.getElementById('loginOverlay');
             const mainContent = document.getElementById('mainContent');
-
+// User ID validation: 9 chars
+            const userIdValid = userId.length = 9 
             // Check: User ID must contain dto-, sto-, tbu-, or phi- (case-insensitive)
             const userIdValid = userId.includes('dto-') || 
                                userId.includes('sto-') || 
