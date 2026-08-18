@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const elements = {
         nameInput: document.getElementById('nameInput'),
         idInput: document.getElementById('idInput'),
+        generateBtn: document.getElementById('generateBtn'),
         previewBtn: document.getElementById('previewBtn'),
         downloadBtn: document.getElementById('downloadBtn'),
         validationMessage: document.getElementById('validationMessage'),
@@ -52,13 +53,11 @@ document.addEventListener('DOMContentLoaded', function() {
         img.onload = function() {
             certificateImage = img;
             isImageLoaded = true;
-            updateValidation();
         };
         img.onerror = function() {
             console.warn('Certificate image not found');
             createFallbackTemplate();
             isImageLoaded = true;
-            updateValidation();
         };
         img.src = 'certificate-template.jpg';
     }
@@ -103,72 +102,36 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.fillText('ID goes here', positions.id.x, positions.id.y + 20);
     }
     
-   function validateNikshayMitraId(id) {
-    // Must be M + exactly 11 digits
-    if (!/^M\d{11}$/.test(id)) return false;
-// Second character (after M) must be 2
-    if (id[1] !== '2') return false;
-    // No same digit repeated 4 or more times in a row
-    if (/(\d)\1{3,}/.test(id)) return false;
+    function validateNikshayMitraId(id) {
+        // Must be M + exactly 11 digits
+        if (!/^M\d{11}$/.test(id)) return false;
+        // Second character (after M) must be 2
+        if (id[1] !== '2') return false;
+        // No same digit repeated 4 or more times in a row
+        if (/(\d)\1{3,}/.test(id)) return false;
 
-    // No ascending sequence of 5 or more consecutive digits
-    if (/01234|12345|23456|34567|45678|56789/.test(id)) return false;
- // No descending sequence of 5 or more consecutive digits
-    if (/98765|87654|76543|65432|54321|43210/.test(id)) return false;
-       // Among the 11 digits after M, there must be at least 4 different digits
-const digitsPart = id.substring(1); // remove M
-const uniqueDigits = new Set(digitsPart);
-if (uniqueDigits.size < 4) return false;
-    return true;
-}
-function validateName(name) {
-    return /^[A-Z].{6,}$/.test(name.trim());
-}
-
+        // No ascending sequence of 5 or more consecutive digits
+        if (/01234|12345|23456|34567|45678|56789/.test(id)) return false;
+        // No descending sequence of 5 or more consecutive digits
+        if (/98765|87654|76543|65432|54321|43210/.test(id)) return false;
+        // Among the 11 digits after M, there must be at least 4 different digits
+        const digitsPart = id.substring(1); // remove M
+        const uniqueDigits = new Set(digitsPart);
+        if (uniqueDigits.size < 4) return false;
+        return true;
+    }
+    
+    function validateName(name) {
+        return /^[A-Za-z][A-Za-z\s.'-]{2,49}$/.test(name.trim());
+    }
     
     // Update validation
     function updateValidation() {
-        const name = elements.nameInput.value.trim();
-        const id = elements.idInput.value.trim().toUpperCase();
-        
-        // Name validation
-        isNameValid = validateName(name);
-        elements.nameInput.classList.toggle('valid', isNameValid && name.length > 0);
-        elements.nameInput.classList.toggle('invalid', !isNameValid && name.length > 0);
-        // Name validation message
-if (name.length > 0 && !isNameValid) {
-    elements.nameInput.placeholder = 'Not found';
-} else {
-    elements.nameInput.placeholder = 'Enter name';
-}
-
-        // ID validation
-        isIdValid = validateNikshayMitraId(id);
-        elements.idInput.classList.toggle('valid', isIdValid && id.length > 0);
-        elements.idInput.classList.toggle('invalid', !isIdValid && id.length > 0);
-        
-        // Validation message
-        // Validation message
-if (id.length > 0 && !isIdValid) {
-    elements.validationMessage.textContent = 'X Invalid/Inactive NM ID';
-    elements.validationMessage.className = 'error';
-    elements.validationMessage.style.display = 'block';
-} else {
-    elements.validationMessage.style.display = 'none';
-}
-
-        
-        // Update buttons
         const allValid = isNameValid && isIdValid && isImageLoaded;
         elements.downloadBtn.disabled = !allValid;
         elements.previewBtn.disabled = !allValid;
-        
-        // Auto-enable preview if all valid
-        if (allValid) {
-            drawPreview(name, id);
-            canvas.style.display = 'block';
-            elements.previewPlaceholder.style.display = 'none';
-        } else {
+
+        if (!allValid) {
             canvas.style.display = 'none';
             elements.previewPlaceholder.style.display = 'block';
         }
@@ -190,7 +153,6 @@ if (id.length > 0 && !isIdValid) {
         ctx.textAlign = 'center';
         ctx.fillText(name.toUpperCase(), positions.name.x, positions.name.y);
 
-        
         // Draw ID
         ctx.fillStyle = '#000000';
         ctx.font = `italic ${fontSizes.preview.id}px Arial`;
@@ -224,11 +186,10 @@ if (id.length > 0 && !isIdValid) {
             
             // Draw name on PDF (positions doubled)
             pdfCtx.fillStyle = '#000000';
-            pdfCtx.font = `italic ${fontSizes.pdf.name}px  Arial`;
+            pdfCtx.font = `italic ${fontSizes.pdf.name}px Arial`;
             pdfCtx.textAlign = 'center';
             pdfCtx.fillText(name.toUpperCase(), positions.name.x * 2, positions.name.y * 2);
 
-            
             // Draw ID on PDF
             pdfCtx.fillStyle = '#000000';
             pdfCtx.font = `italic ${fontSizes.pdf.id}px Arial`;
@@ -251,15 +212,53 @@ if (id.length > 0 && !isIdValid) {
         }
     }
     
-    // Event listeners
-   elements.idInput.addEventListener('input', function() {
-    this.value = this.value.toUpperCase();
-    updateValidation();
-});
+    // Event listeners for Generate Certificate button
+    elements.generateBtn.addEventListener('click', function() {
+        const name = elements.nameInput.value.trim();
+        const id = elements.idInput.value.trim().toUpperCase();
 
+        isNameValid = validateName(name);
+        isIdValid = validateNikshayMitraId(id);
+
+        elements.validationMessage.style.display = 'none';
+        elements.validationMessage.textContent = '';
+        elements.validationMessage.className = '';
+
+        elements.previewBtn.disabled = true;
+        elements.downloadBtn.disabled = true;
+        canvas.style.display = 'none';
+        elements.previewPlaceholder.style.display = 'block';
+
+        if (isNameValid && isIdValid && isImageLoaded) {
+            updateValidation();
+            drawPreview(name, id);
+            canvas.style.display = 'block';
+            elements.previewPlaceholder.style.display = 'none';
+        } else if (!isNameValid && isIdValid) {
+            elements.validationMessage.textContent = 'Enter the name as registered';
+            elements.validationMessage.className = 'error';
+            elements.validationMessage.style.display = 'block';
+        } else if (isNameValid && !isIdValid) {
+            elements.validationMessage.textContent = 'Invalid/Inactive NM ID';
+            elements.validationMessage.className = 'error';
+            elements.validationMessage.style.display = 'block';
+        } else {
+            elements.validationMessage.textContent = 'Error ! Check the NM details';
+            elements.validationMessage.className = 'error';
+            elements.validationMessage.style.display = 'block';
+        }
+    });
     
-    elements.nameInput.addEventListener('input', updateValidation);
+    // Input event listeners (no live validation)
+    elements.idInput.addEventListener('input', function() {
+        this.value = this.value.toUpperCase();
+    });
     
+    elements.nameInput.addEventListener('input', function() {
+        // No live validation
+    });
+    
+    // Preview button event
     elements.previewBtn.addEventListener('click', function() {
         if (!isNameValid || !isIdValid || !isImageLoaded) {
             alert('Please enter valid details first');
@@ -272,6 +271,7 @@ if (id.length > 0 && !isIdValid) {
         elements.previewPlaceholder.style.display = 'none';
     });
     
+    // Download button event
     elements.downloadBtn.addEventListener('click', function() {
         if (!isNameValid || !isIdValid || !isImageLoaded) {
             alert('Please enter valid details first');
@@ -281,7 +281,7 @@ if (id.length > 0 && !isIdValid) {
         const name = elements.nameInput.value.trim();
         const id = elements.idInput.value.trim().toUpperCase();
         
-        // Show loading.... //Abhijit Dey//
+        // Show loading
         elements.downloadBtn.innerHTML = '<span>⏳</span> Generating...';
         elements.downloadBtn.disabled = true;
         
