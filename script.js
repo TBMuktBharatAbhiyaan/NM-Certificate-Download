@@ -87,8 +87,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ─── Validate Name ────────────────────────────────────────────────
     function validateName(name) {
-        // At least 3 chars, starts with a letter, allows letters/spaces/dots/hyphens/apostrophes
-        return /^[A-Za-z][A-Za-z\s.''-]{2,59}$/.test(name.trim());
+        // At least 7 chars, starts with a letter, allows letters/spaces/dots/hyphens/apostrophes
+        return /^[A-Za-z][A-Za-z\s.''-]{6,59}$/.test(name.trim());
     }
 
     // ─── Validate NM ID ───────────────────────────────────────────────
@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         hideMessage();
 
-        if (isNameValid && isIdValid) {
+               if (isNameValid && isIdValid) {
             // ✅ Both valid
             if (!isImageLoaded) {
                 showMessage('⏳ Template still loading, please try again in a moment.', 'error');
@@ -231,9 +231,10 @@ document.addEventListener('DOMContentLoaded', function () {
             idInput.classList.add('valid');
             previewBtn.disabled  = false;
             downloadBtn.disabled = false;
-            drawPreview(name, id);
-            canvas.style.display             = 'block';
-            previewPlaceholder.style.display = 'none';
+            hideMessage();
+            // DO NOT show preview yet — only when Preview button is clicked
+        }
+
 
         } else if (!isNameValid && isIdValid) {
             // ❌ Name wrong only
