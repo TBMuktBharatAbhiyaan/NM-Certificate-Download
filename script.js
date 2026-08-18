@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Name wrong only
             nameInput.classList.add('invalid');
             idInput.classList.add('valid');
-            showMessage('⚠️ Enter the name as registered (min 7 characters)', 'error');
+            showMessage('⚠️ Enter the name as registered !', 'error');
 
         } else if (isNameValid && !isIdValid) {
             // ID wrong only
