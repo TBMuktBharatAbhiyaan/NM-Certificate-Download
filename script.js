@@ -222,19 +222,19 @@ document.addEventListener('DOMContentLoaded', function () {
             // Name wrong only
             nameInput.classList.add('invalid');
             idInput.classList.add('valid');
-            showMessage('⚠️ Enter the name as registered !', 'error');
+            showMessage('⚠️ Mismatch Error! Check the NM ID/Name', 'error');
 
         } else if (isNameValid && !isIdValid) {
             // ID wrong only
             nameInput.classList.add('valid');
             idInput.classList.add('invalid');
-            showMessage('❌ Invalid / Inactive NM ID', 'error');
+            showMessage('❌ Mismatch Error! Check the NM ID/Name', 'error');
 
         } else {
             // Both wrong
             nameInput.classList.add('invalid');
             idInput.classList.add('invalid');
-            showMessage('🚫 Error! Check both Name and NM ID', 'error');
+            showMessage('🚫 Mismatch Error! Check the NM ID/Name', 'error');
         }
     });
 
