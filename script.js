@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function () {
             idInput.classList.add('valid');
             previewBtn.disabled  = false;
             downloadBtn.disabled = false;
-            showMessage('✅ Details verified! Click Preview or Download.', 'success');
+            showMessage('Click Preview or Download.', 'success');
 
         } else if (!isNameValid && isIdValid) {
             // Name wrong only
