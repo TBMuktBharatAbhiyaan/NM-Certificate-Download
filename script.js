@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // 2nd character must be 2
         if (id[1] !== '2')                                        return false;
         // No digit repeated 4+ times in a row
-        if (/(\d)\1{3,}/.test(id))                               return false;
+        if (/(\d)\1{4,}/.test(id))                               return false;
         // No ascending run of 5+ digits
         if (/01234|12345|23456|34567|45678|56789/.test(id))       return false;
         // No descending run of 5+ digits
