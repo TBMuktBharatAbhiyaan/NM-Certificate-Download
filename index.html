@@ -449,7 +449,7 @@
         const errorMsg = document.getElementById('loginError');
 
         // ✅ Username: exactly 6 OR 9 characters AND must start with sto- OR dto-
-        const userIdValid = (userId.length === 6 || userId.length === 9) &&
+        const userIdValid = (userId.length === 6 || userId.length === 9 || userId.length === 11) &&
                     /^(sto-|dto-|tbu-)/i.test(userId);
 
         // ✅ Password: min 8 chars, uppercase, lowercase, digit, special char
